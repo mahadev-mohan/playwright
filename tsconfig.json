@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    /* Modules & Target */
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    
+    /* Strictness & Error Checking */
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true, // Kept this strict check from your original
+
+    /* Emit */
+    "outDir": "./build",
+    "sourceMap": true,
+    "noEmit": true, // Crucial if you are using a separate tool (like Babel or SWC) or running tests directly (like ts-node)
+    
+    /* Project Files */
+    "allowJs": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "./tests/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "./build"
+  ]
+}

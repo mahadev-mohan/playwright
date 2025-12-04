@@ -1,0 +1,11 @@
+{
+  "urls": {
+    "baseUrl": "https://www.saucedemo.com"
+    },
+    "credentials": {
+      "validUsername": "standard_user",
+      "validPassword": "secret_sauce",
+      "invalidUsername": "inavlid8yu",
+      "invalidPassword": "inavlid"
+    }
+}
