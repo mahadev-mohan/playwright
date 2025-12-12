@@ -5,6 +5,7 @@ import { CustomWorld } from "./world";
 setDefaultTimeout(30000)
 Before(async function (this: CustomWorld) {
   await this.init();
+  await this.initApi();
   await LoadPages(this, this.page);
   console.log("test starts at before hooks")
 });

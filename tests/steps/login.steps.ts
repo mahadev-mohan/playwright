@@ -4,11 +4,20 @@ import testData from "../data/testData.json"
 import { CustomWorld } from "../support/world";
 
 
-Given("the user launches the browser with Swag Labs url", async function () {
-  await this.basePage.goTo(testData.urls.baseUrl);
+Given("the user launches the browser with Swag Labs url", async function (this: CustomWorld) {
+    
+    const response = await this.apiContext.get('/users/1');
+
+    expect(response.ok()).toBeTruthy();
+    const data = await response.json();
+
+    expect(data.id).toBe(1);
+    const url = process.env.BASE_URL as string;
+    console.log(url);
+    await this.basePage.goTo(url);
   
 });
-Then('the user should see login page',async function name() {
+Then('the user should see login page',async function name(this: CustomWorld) {
     const title = await this.basePage.getTitle();
     expect(title).toEqual('Swag Labs');
     const loginpageLogo = await this.loginPage.getLogo();
@@ -16,12 +25,12 @@ Then('the user should see login page',async function name() {
     await this.basePage.attachScreenshot(this.attach);
     this.log("Navigate to Swag Labs page successfully.")
 })
-When('the user enters username and password',async function(){
+When('the user enters username and password',async function(this: CustomWorld){
     await this.loginPage.enterUsername(testData.credentials.validUsername);
     await this.loginPage.enterPassword(testData.credentials.validPassword);
     await this.loginPage.clickLoginButton();
 })
-Then('the user should see products page',async function(){
+Then('the user should see products page',async function(this: CustomWorld){
     const header = await this.productsPage.getswagLabsHeader();
     await expect(header).toBeVisible();
     await this.basePage.attachScreenshot(this.attach);
@@ -31,17 +40,17 @@ Then('the user should see products page',async function(){
     this.log("user logged in successfully.")
 })
 
-When('the user enters invalid username and password', async function(){
+When('the user enters invalid username and password', async function(this: CustomWorld){
     await this.loginPage.enterUsername(testData.credentials.invalidUsername);
     await this.loginPage.enterPassword(testData.credentials.invalidPassword);
     await this.loginPage.clickLoginButton();
 })
-Then('the user should see error message', async function(){
+Then('the user should see error message', async function(this: CustomWorld){
     const errorMessage = await this.loginPage.getLoginErrorMessage();
     await expect(errorMessage).toBeVisible();
     await this.basePage.attachScreenshot(this.attach);
 })
-Then('the user should not navigate to products page', async function(){
+Then('the user should not navigate to products page', async function(this: CustomWorld){
     const url = await this.basePage.getCurrentUrl();
     this.log(`current url - ${url}`)
     expect(url).not.toContain('inventory')

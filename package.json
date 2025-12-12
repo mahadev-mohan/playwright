@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npm install",
     "compile": "npx tsc --build --clean && npx tsc --build",
-    "runCommand":"cucumber-js"
+    "runCommand": "cucumber-js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,8 @@
     "@types/node": "^24.10.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
   }
 }
